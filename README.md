@@ -20,12 +20,14 @@ round, and the depth is one hop away when you need it.
 | File | Read it when |
 |---|---|
 | [`SKILL.md`](SKILL.md) | Always — it is the contract in one page |
+| [`references/agent-specificity.md`](references/agent-specificity.md) | The pairing map: what each side uniquely knows, and what never to send |
 | [`references/work-order.md`](references/work-order.md) | Writing an order of any size |
 | [`references/receipt-and-verification.md`](references/receipt-and-verification.md) | A result came back and you must judge it |
 | [`references/conversation-discipline.md`](references/conversation-discipline.md) | Work is in flight; you want to check, correct or stop it |
 | [`references/anti-patterns.md`](references/anti-patterns.md) | Something feels inefficient and you want the name for it |
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | Configuring how one agent writes to another |
-| [`references/why-this-shape.md`](references/why-this-shape.md) | You want the architecture behind the rules |
+| [`references/answer-contract.md`](references/answer-contract.md) | Writing the return, or judging its quality (accuracy / completeness / structure) |
+| [`references/why-this-shape.md`](references/why-this-shape.md) | The architecture behind the rules, and how this relates to A2A and MCP |
 | [`templates/work-order.md`](templates/work-order.md) | Copy-paste skeleton for an order |
 | [`examples/before-and-after.md`](examples/before-and-after.md) | Five worked examples, good and bad |
 
@@ -43,10 +45,11 @@ error · who verifies.
 - `blocked_with_evidence` — could not proceed, cause and next action given; the
   most valuable return there is, because it arrives before money is wasted.
 
-**You obey six rules:** one unit of work = one complete order · if it cannot be
+**You obey seven rules:** one unit of work = one complete order · if it cannot be
 checked it is not done · state the outcome, not the choreography · a typed refusal
 is a verdict, not an outage · steer before you cancel, wrap up before you stop ·
-the machine channel is a protocol, not a personality.
+the machine channel is a protocol, not a personality · give it only what it cannot
+know.
 
 ## Install
 
@@ -111,6 +114,22 @@ product, and it is written from the perspective of the execution side of the pai
 If you find a rule that does not hold in your setup, the reasoning in
 `references/why-this-shape.md` is written so you can re-derive the rule instead of
 inheriting it.
+
+## Related standards
+
+This document is deliberately a **contract**, not a wire protocol. It says what a
+message should contain and what a return must prove; it does not say how the bytes
+travel or how an agent is discovered.
+
+Those are separate problems with separate solutions. If you need discovery, a
+standard task lifecycle, or push delivery between parties that do not share a
+codebase, an open standard such as [A2A](https://github.com/a2aproject/A2A)
+provides the envelope — MCP plays the same role for agent-to-tool connections.
+
+The two layers are complementary rather than competing: **the wire carries the
+message; this contract decides what the message says.** The mapping between A2A's
+task states and the vocabulary used here is in
+[`references/why-this-shape.md`](references/why-this-shape.md).
 
 ## License
 

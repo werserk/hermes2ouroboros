@@ -1,7 +1,7 @@
 ---
 name: hermes2ouroboros
 description: "Use when commissioning work from Ouroboros — or from any execution agent that owns its own planning, verification and reporting — and when reading its result back. The agent-to-agent work-order and receipt contract, plus the anti-patterns that make two capable agents expensive."
-version: 1.0.0
+version: 1.1.0
 author: Ouroboros
 license: MIT
 platforms: [linux, macos, windows]
@@ -25,6 +25,12 @@ The thesis in one line: **you will spend more on ambiguity than on intelligence.
 Everything below exists to buy ambiguity down at the cheapest possible moment —
 before you send, not during the task.
 
+Two cautions before you read on. First, this contract constrains **the order**,
+not the executor: an agent with its own principles already has standards, and
+restating them back at it is noise you pay for on every round — see
+[`references/agent-specificity.md`](references/agent-specificity.md). Second, it
+is not about politeness. The machine channel is a protocol.
+
 ## When to use
 
 - You are about to commission a non-trivial unit of work: a deliverable, a change,
@@ -42,7 +48,7 @@ before you send, not during the task.
   conversation, not an order, and dressing it as one produces confident prose
   priced like a deliverable.
 
-## The six rules
+## The seven rules
 
 1. **One unit of work = one complete order.** Not five messages refining one
    intent. The executor bills per model round; every extra message is a round
@@ -64,6 +70,11 @@ before you send, not during the task.
 6. **The machine channel is a protocol, not a personality.** Voice, mood and
    role-play belong at the edge, where a human is reading. See
    `references/tone-and-persona.md`.
+7. **Give it only what it cannot know.** Your context, your decision, your
+   reader, your authority, your sources — not its own method, and not standards
+   it already holds. Sending the second kind is not caution; it is a ceiling you
+   install on your own result. See
+   [`references/agent-specificity.md`](references/agent-specificity.md).
 
 ## What you send: the nine fields
 
@@ -144,6 +155,7 @@ running" as the expected answer, not a failure to report.
 - [ ] Is the budget above the executor's wrap-up reserve? (See
       [`references/why-this-shape.md`](references/why-this-shape.md) — a cap at or
       below the margin guarantees the task finalizes without doing the work.)
+- [ ] Have I sent only what it cannot know — with no standard it already holds?
 - [ ] Am I sending this as one message rather than starting a drip?
 - [ ] Would I accept a `blocked_with_evidence` return as a valid outcome of this
       order? If not, the order is under-specified.
@@ -152,8 +164,10 @@ running" as the expected answer, not a failure to report.
 
 | File | Read it when |
 |---|---|
+| [`references/agent-specificity.md`](references/agent-specificity.md) | You want the pairing map: what each side uniquely knows |
 | [`references/work-order.md`](references/work-order.md) | Writing an order of any size |
 | [`references/receipt-and-verification.md`](references/receipt-and-verification.md) | A result came back and you must judge it |
+| [`references/answer-contract.md`](references/answer-contract.md) | You are writing the return, or judging its quality |
 | [`references/conversation-discipline.md`](references/conversation-discipline.md) | Work is in flight; you want to check, correct or stop it |
 | [`references/anti-patterns.md`](references/anti-patterns.md) | Something feels inefficient and you want the name for it |
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | You are configuring how the agent writes to another agent |

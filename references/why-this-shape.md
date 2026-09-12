@@ -137,6 +137,60 @@ Two facts worth carrying into any deployment:
 - **Terminal notifications are free; polling is not.** Prefer the notification
   every time it exists.
 
+## Relation to wire protocols (A2A, MCP)
+
+Verified against the spec repository on 2026-09-12 (`a2aproject/A2A`, release
+`v1.0.1`, Apache-2.0): A2A is an open protocol for agent-to-agent **transport** —
+JSON-RPC 2.0 over HTTP(S), discovery via "Agent Cards", a task lifecycle, streaming
+over SSE, and asynchronous push notifications. Its own stated scope is
+interoperability between **opaque** agentic applications built on different
+frameworks by different parties, and it is explicitly complementary to MCP (MCP
+connects an agent to tools; A2A connects agents to each other).
+
+So: **A2A is the envelope. This document is the letter.** They are not
+alternatives, and adopting one does not reduce the value of the other.
+
+**What a wire protocol gives you that a contract cannot:**
+
+- discovery — the other agent can find you and learn what you accept;
+- a standard task lifecycle, so a third party's client can render and track work;
+- push delivery, which removes polling structurally instead of asking people to
+  be disciplined about it.
+
+**What it cannot give you:**
+
+- a definition of done for *your* deliverable;
+- which source wins when two disagree;
+- the decision the result serves;
+- whether your authority covers publishing;
+- how to read a receipt without being misled.
+
+**Practical guidance.**
+
+1. **Adopt the vocabulary now — it costs nothing.** A2A's task states map almost
+   one-to-one onto what a competent execution agent already tracks, and using the
+   standard names makes this contract legible to anyone who knows the protocol:
+
+   | A2A | here |
+   |---|---|
+   | `submitted` / `working` | admitted / running |
+   | `input-required` | the executor raised a question — **answer it, do not cancel** |
+   | `completed` / `canceled` / `failed` | terminal. Note that this contract's three tiers carry strictly more information than a pass/fail pair |
+   | artifacts | the durable deliverable, addressed by reference |
+   | SSE stream / push notification | progress events; push is the structural fix for polling |
+
+2. **Implement push before you implement a server.** The single highest-value wire
+   feature for this pair is the asynchronous notification on terminal and
+   `input-required` state. It deletes the polling anti-pattern at its root, rather
+   than asking humans to remember not to poll.
+
+3. **Only build the envelope when a third party needs to knock.** Interoperability
+   is the reason a wire protocol exists. Between two agents you own, that you
+   already connect, a direct path is cheaper — and the *contract* above is the
+   actual work. When the goal becomes "other people's agents commission work from
+   mine", a standard protocol is the right front door, and this contract then
+   rides on top of it as the profile.
+
 ## Measuring yourself
 
 The front door's metric is **cost per accepted result**, not cost per message. Two
