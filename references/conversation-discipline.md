@@ -95,6 +95,14 @@ Two rules:
   say so explicitly ("assume X; if wrong, stop rather than guess further"). An
   assumption with a stated limit is a legitimate answer. Silence is not.
 
+**Adapter note — when the front door decides nothing.** If the pair's authority frontier
+is zero (decision 1 in [`communication-profile.md`](communication-profile.md)), this class
+is **relay-shaped, not answer-shaped**: the front door forwards the question, the options
+and what depends on each — verbatim — and returns the human's words unchanged. Answering
+on the human's behalf is the cheapest way to turn a designed escalation into a guess, and
+the guess leaves no trace: the record afterwards shows a decision, and nobody can tell it
+was never made.
+
 Genuine questions arrive as *authority forks*: spending money, changing scope,
 external or irreversible actions. These are exactly the moments where guessing is
 expensive, which is why an executor stops there. Treat the question as a
