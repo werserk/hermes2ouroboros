@@ -133,6 +133,54 @@ message; this contract decides what the message says.** The mapping between A2A'
 task states and the vocabulary used here is in
 [`references/why-this-shape.md`](references/why-this-shape.md).
 
+## Verifying this repository
+
+The check that matters for a published skill is that **a stranger with no
+credentials can read exactly what was intended**. That is one clone and one
+script, and it needs no auth:
+
+```sh
+git clone https://github.com/<owner>/hermes2ouroboros /tmp/h2o-check && cd /tmp/h2o-check
+python3 - <<'PY'
+import pathlib, re
+root = pathlib.Path('.').resolve()
+files = sorted(p for p in root.rglob('*') if p.is_file() and '.git' not in p.parts)
+md = [f for f in files if f.suffix == '.md']
+refs = sorted(p.name for p in (root / 'references').glob('*.md'))
+targets = refs + ['templates/work-order.md', 'examples/before-and-after.md']
+bad = []
+for f in md:
+    for m in re.finditer(r'\]\(([^)]+)\)', f.read_text(encoding='utf-8')):
+        t = m.group(1)
+        if t.startswith(('http://', 'https://', '#', 'mailto:')):
+            continue
+        t = t.split('#')[0].strip()
+        if t and not (f.parent / t).resolve().exists():
+            bad.append(f"{f.relative_to(root)} -> {t}")
+print(f"files={len(files)} md={len(md)} broken_links={len(bad)}")
+for name in ('SKILL.md', 'README.md'):                      # each entry surface, separately
+    text = (root / name).read_text(encoding='utf-8')
+    missing = [t for t in targets if t not in text]
+    print(f"{name}: unreached={missing or 'none'}")
+print("links_ok =", not bad)
+PY
+```
+
+Expected: `broken_links=0`, and `unreached=none` for **both** entry surfaces
+independently. Reporting the union is not enough — a reference reachable only
+from the README is unreachable for a reader who arrived through `SKILL.md`.
+
+Three honest notes on what this does and does not establish:
+
+- It verifies **structure and reachability**, which is what a markdown skill can
+  be wrong about mechanically. It cannot verify that the *advice* is good; that
+  is a judgement, and it is meant to be argued with.
+- It must be run against the **published remote**, not your local checkout. A
+  local pass says nothing about what actually landed.
+- The file counts in this README are deliberately not restated as numbers here;
+  a count written into documentation goes stale, and the script prints the live
+  one.
+
 ## License
 
 MIT. See [`LICENSE`](LICENSE).
