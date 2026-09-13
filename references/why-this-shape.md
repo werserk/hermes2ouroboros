@@ -16,7 +16,8 @@ against a ledger that reserves budget before each provider call.
 The architecture statements in this file are **assumptions about a specific
 implementation**, observed at Ouroboros `7.2.1`; the load-bearing symbols are
 `ouroboros/task_pacing.py::resolve_cost_ceiling`,
-`ouroboros/contracts/task_contract.py`, `ouroboros/cancel_intents.py` and
+`ouroboros/contracts/task_contract.py`, `ouroboros/cancel_intents.py`,
+`ouroboros/usage_accounting.py::execute_physical_attempt` and
 `docs/ARCHITECTURE.md`. They are not universal properties of execution agents. A
 different executor will differ, and a reader should re-derive these rules from its
 own source rather than inherit them.

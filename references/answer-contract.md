@@ -113,9 +113,15 @@ Structure exists so the reader can **stop early and still be correct**.
 
 ### The required order
 
-1. **Verdict** — one line. What happened, on which of the three tiers
+1. **Verdict** — one line: what happened, on which of the three tiers
    (`solved` / `best_effort` / `blocked_with_evidence`). If the reader stops here,
    they must not be misled.
+   Note that the tier is a **field on the record**, classified by the executor —
+   it is *never a substitute for the answer*. A return whose answer text is the
+   bare word `blocked_with_evidence` has delivered no answer at all, and the
+   reference implementation treats exactly that shape as a *missing* answer. A
+   blocked or partial delivery must still carry the best-supported answer that
+   was actually reached, with the tier and the gaps stated beside it.
 2. **The answer** — what was asked for, in the shape it will be used.
 3. **Evidence** — what was checked, how, and with what result; anchors included.
 4. **Gaps** — omissions, uncertainties, and what would resolve them.
@@ -171,6 +177,9 @@ NEXT
 ```
 
 ---
+
+`VERDICT` is a record field the executor classifies — not prose you write *into*
+the answer. Keep the answer an answer; state the tier beside it.
 
 ## A short critique checklist for a return
 

@@ -184,7 +184,10 @@ language:
   machine_channel: "<protocol language>"        # e.g. "en"
   code_and_commits: "en"
 budget:
-  per_task_cap_usd: null           # null = no per-task cap
+  per_task_cap_usd: null           # null = no per-task cap; a finite global budget still
+                                   # derives one. With NO finite budget anywhere the in-task
+                                   # cost stop is DISABLED — so state a number rather than
+                                   # trusting a safe-looking default
   absolute_floor_usd: "platform_defined"   # the EXECUTOR's wrap-up reserve, from its own docs
                                            # (3.0 USD for the Ouroboros reference implementation);
                                            # never set a per-task cap at or below this

@@ -69,7 +69,7 @@ each side's specificity instead of demanding that both be generic.
 | | Front door (Hermes) | Executor (Ouroboros) |
 |---|---|---|
 | **Unique strength** | The human relationship: durable memory of a person, their voice, their priorities. Breadth: many threads, many skills, many transports (chat, mail, PR). Scheduling and cadence. Deciding *what is worth doing*. | Depth on one objective: its own planning, its own environment authority, real verification with receipts, artifact custody, long horizons, work that outlives a conversation. The right to refuse. |
-| **Blind spot** | Does not know the deep state of an execution environment. Cannot verify deeply. A long blocking task competes with its responsiveness to the human. | Does not know your conversation, your reader, your authority, or your priorities — **and it will not stop to ask. It will fill the vacuum with a confident, reasonable, possibly wrong assumption.** |
+| **Blind spot** | Does not know the deep state of an execution environment. Cannot verify deeply. A long blocking task competes with its responsiveness to the human. | Does not know your conversation, your reader, your authority, or your priorities — **and it will not stop to ask about missing context. It stops only at a stated authority fork. Everything else it fills with a confident, reasonable, possibly wrong assumption.** |
 | **Contributes to the pair** | Context, authority, the definition of done, the consumer, the cadence, delivery | Method, depth, verification, artifacts, the honest verdict |
 | **Must not attempt** | Dictating method; re-deriving the executor's verification; being the second source of truth for its results | Guessing the consumer; inventing the authority boundary; deciding what matters to the human |
 

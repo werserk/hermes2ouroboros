@@ -152,6 +152,12 @@ The cheap fields. Each one you omit is a plausible round of rework.
 > platform exposes the cap as a per-task setting, check the shipped margin before
 > choosing a number — a cap chosen "to be safe" is the most common way to buy
 > nothing.
+>
+> **Omitting the cap is not automatically safer.** The margin branch above applies
+> only when a cap exists. Where *no finite budget is configured anywhere* — no
+> per-task cap and no global budget — the in-task cost stop is **disabled**, and
+> the task runs with no ceiling at all. So state a number: either a cap that can
+> buy the work, or a global budget from which the platform derives one.
 
 ## 7. The decision this serves
 

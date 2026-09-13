@@ -93,15 +93,18 @@ reports it as a failure, or escalates it as an incident.
 will say the same thing next time. Retrying buys the same answer twice; reporting
 it as an outage hides the actionable reason behind an alarm.
 
-**The fix.** Read the reason. It distinguishes cases you must handle differently:
+**The fix.** Read the reason and classify it. What follows is a *useful mental
+model* — four classes that must be handled differently — not a vocabulary the
+executor is guaranteed to emit verbatim:
 
 - *retryable* — a transient condition; wait and retry
 - *needs a different request* — the request itself is the problem; change it
 - *needs a decision* — a human or an authority must act
 - *permanent* — do not retry; re-plan
 
-Never collapse these into one "it failed" branch. The vocabulary exists precisely
-so that you do not have to guess.
+Never collapse these into one "it failed" branch. The closed, machine-readable
+version of this set — with the required handling for each class — is in
+[`transport-adapter.md`](transport-adapter.md).
 
 ---
 
