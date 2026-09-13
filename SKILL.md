@@ -1,7 +1,7 @@
 ---
 name: hermes2ouroboros
 description: "Use when commissioning work from Ouroboros — or from any execution agent that owns its own planning, verification and reporting — and when reading its result back. The agent-to-agent work-order and receipt contract, plus the anti-patterns that make two capable agents expensive."
-version: 1.3.0
+version: 1.3.1
 author: Ouroboros
 license: MIT
 platforms: [linux, macos, windows]

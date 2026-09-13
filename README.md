@@ -29,9 +29,36 @@ round, and the depth is one hop away when you need it.
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | Configuring how one agent writes to another |
 | [`references/answer-contract.md`](references/answer-contract.md) | Writing the return, or judging its quality (accuracy / completeness / structure) |
 | [`references/why-this-shape.md`](references/why-this-shape.md) | The architecture behind the rules, and how this relates to A2A and MCP |
-| [`references/communication-profile.md`](references/communication-profile.md) | The five standing decisions to answer once, with a fill-in block |
+| [`references/communication-profile.md`](references/communication-profile.md) | The five standing decisions — answered for this pair, with one still open |
 | [`templates/work-order.md`](templates/work-order.md) | Copy-paste skeleton for an order |
 | [`examples/before-and-after.md`](examples/before-and-after.md) | Five worked examples, good and bad |
+
+## Install
+
+A skill is a directory. Ask the platform where a profile's skills live instead of
+assuming a path, then copy the directory in under a category:
+
+```sh
+PROFILE="$(hermes profile show <profile-name> | sed -n 's/^Path: *//p')"
+mkdir -p "$PROFILE/skills/autonomous-ai-agents"
+cp -a hermes2ouroboros "$PROFILE/skills/autonomous-ai-agents/"
+hermes skills list | grep hermes2ouroboros      # verify with the loader, not with ls
+```
+
+`HERMES_HOME` selects the profile root for a command that carries no profile flag.
+
+Two things worth knowing before you call it installed:
+
+- **A directory that exists and a skill that loads are different facts** — only the
+  loader answers the second. `hermes profile show <name>` prints a skill *count*,
+  which is the cheapest way to watch the number move.
+- **Curators archive things.** Hermes's curator prunes stale agent-created skills
+  (30 days unused → stale, 90 → archived, archives recoverable). A skill with **no
+  provenance marker** shows up in `hermes curator list-unmanaged` and is *never*
+  auto-staled or auto-archived — the state you want for a relationship contract that
+  has to outlive a quiet month. `hermes curator adopt <name>` hands it to the curator,
+  and the staleness rules then apply to it. Choose deliberately: adopting is not
+  "more correct", it is a different lifetime.
 
 ## The contract in one screen
 
