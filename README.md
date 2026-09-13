@@ -29,7 +29,7 @@ round, and the depth is one hop away when you need it.
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | Configuring how one agent writes to another |
 | [`references/answer-contract.md`](references/answer-contract.md) | Writing the return, or judging its quality (accuracy / completeness / structure) |
 | [`references/why-this-shape.md`](references/why-this-shape.md) | The architecture behind the rules, and how this relates to A2A and MCP |
-| [`references/communication-profile.md`](references/communication-profile.md) | The ten decisions to answer once, with a fill-in block |
+| [`references/communication-profile.md`](references/communication-profile.md) | The five standing decisions to answer once, with a fill-in block |
 | [`templates/work-order.md`](templates/work-order.md) | Copy-paste skeleton for an order |
 | [`examples/before-and-after.md`](examples/before-and-after.md) | Five worked examples, good and bad |
 

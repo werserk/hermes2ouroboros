@@ -1,7 +1,7 @@
 ---
 name: hermes2ouroboros
 description: "Use when commissioning work from Ouroboros — or from any execution agent that owns its own planning, verification and reporting — and when reading its result back. The agent-to-agent work-order and receipt contract, plus the anti-patterns that make two capable agents expensive."
-version: 1.1.0
+version: 1.2.3
 author: Ouroboros
 license: MIT
 platforms: [linux, macos, windows]
@@ -175,6 +175,6 @@ running" as the expected answer, not a failure to report.
 | [`references/conversation-discipline.md`](references/conversation-discipline.md) | Work is in flight; you want to check, correct or stop it |
 | [`references/anti-patterns.md`](references/anti-patterns.md) | Something feels inefficient and you want the name for it |
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | You are configuring how the agent writes to another agent |
-| [`references/communication-profile.md`](references/communication-profile.md) | You are configuring the pair: ten decisions to answer once |
+| [`references/communication-profile.md`](references/communication-profile.md) | You are configuring the pair: the five standing decisions to answer once |
 | [`references/why-this-shape.md`](references/why-this-shape.md) | You want the architectural reasons, not the rules |
 | [`examples/before-and-after.md`](examples/before-and-after.md) | You want to see the same request good and bad |
