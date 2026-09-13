@@ -22,12 +22,14 @@ round, and the depth is one hop away when you need it.
 | [`SKILL.md`](SKILL.md) | Always — it is the contract in one page |
 | [`references/agent-specificity.md`](references/agent-specificity.md) | The pairing map: what each side uniquely knows, and what never to send |
 | [`references/work-order.md`](references/work-order.md) | Writing an order of any size |
+| [`references/transport-adapter.md`](references/transport-adapter.md) | Building or verifying the connection: the seven required operations, identity, failure classes |
 | [`references/receipt-and-verification.md`](references/receipt-and-verification.md) | A result came back and you must judge it |
 | [`references/conversation-discipline.md`](references/conversation-discipline.md) | Work is in flight; you want to check, correct or stop it |
 | [`references/anti-patterns.md`](references/anti-patterns.md) | Something feels inefficient and you want the name for it |
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | Configuring how one agent writes to another |
 | [`references/answer-contract.md`](references/answer-contract.md) | Writing the return, or judging its quality (accuracy / completeness / structure) |
 | [`references/why-this-shape.md`](references/why-this-shape.md) | The architecture behind the rules, and how this relates to A2A and MCP |
+| [`references/communication-profile.md`](references/communication-profile.md) | The ten decisions to answer once, with a fill-in block |
 | [`templates/work-order.md`](templates/work-order.md) | Copy-paste skeleton for an order |
 | [`examples/before-and-after.md`](examples/before-and-after.md) | Five worked examples, good and bad |
 

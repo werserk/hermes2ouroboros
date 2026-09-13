@@ -13,6 +13,14 @@ carries a durable identity, memory and constitution, so it can refuse — and it
 what it actually established rather than what it hoped. It bills per model round
 against a ledger that reserves budget before each provider call.
 
+The architecture statements in this file are **assumptions about a specific
+implementation**, observed at Ouroboros `7.2.1`; the load-bearing symbols are
+`ouroboros/task_pacing.py::resolve_cost_ceiling`,
+`ouroboros/contracts/task_contract.py`, `ouroboros/cancel_intents.py` and
+`docs/ARCHITECTURE.md`. They are not universal properties of execution agents. A
+different executor will differ, and a reader should re-derive these rules from its
+own source rather than inherit them.
+
 **The front-door agent (Hermes).** Durable and multi-session, with a schedule, a
 memory of the human relationship, and ownership of the delivery surface. It is the
 thing the human talks to and the thing that must be able to answer "what
@@ -134,13 +142,20 @@ Two facts worth carrying into any deployment:
 
 - **A running task is steerable, and a stopped task is not.** Learn which of
   `STEER` and `CLOSE`+new-order your platform supports before you need it.
-- **Terminal notifications are free; polling is not.** Prefer the notification
-  every time it exists.
+- **Push beats polling — and verify what push costs.** A terminal notification
+  avoids repeated model rounds, which is the expensive part. It is not
+  necessarily *free*: delivery, retries, persistence and subscription charges are
+  real. Prefer it wherever it exists, and confirm its delivery and retry
+  semantics before depending on it.
 
 ## Relation to wire protocols (A2A, MCP)
 
-Verified against the spec repository on 2026-09-12 (`a2aproject/A2A`, release
-`v1.0.1`, Apache-2.0): A2A is an open protocol for agent-to-agent **transport** —
+Verified against the spec repository on 2026-09-12:
+<https://github.com/a2aproject/A2A>, release tag `v1.0.1` (published 2026-05-28),
+Apache-2.0. The description below is read from that repository's own README and
+the task-state vocabulary it documents. These are fast-moving external facts —
+re-check the tag before relying on them. A2A is an open protocol for
+agent-to-agent **transport** —
 JSON-RPC 2.0 over HTTP(S), discovery via "Agent Cards", a task lifecycle, streaming
 over SSE, and asynchronous push notifications. Its own stated scope is
 interoperability between **opaque** agentic applications built on different

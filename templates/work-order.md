@@ -61,3 +61,13 @@ the executor will treat your guess as a fact and build on it.
 
 <!-- What happens if this is wrong, or late. This is what sets how much
      verification and review the work deserves. -->
+
+## Verification owner
+
+<!-- Who runs the check, with what, and what a pass buys.
+     "You run the check and record a receipt."
+     "I will run it — give me the exact command."
+     "Neither of us can fully verify this: give me the best proxy and say what
+      it misses."
+     Naming this up front prevents the closing argument where a result says
+     "done" and nobody can tell whether that is true. -->

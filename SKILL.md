@@ -51,8 +51,9 @@ is not about politeness. The machine channel is a protocol.
 ## The seven rules
 
 1. **One unit of work = one complete order.** Not five messages refining one
-   intent. The executor bills per model round; every extra message is a round
-   spent re-reading context instead of doing work.
+   intent. In a round-billed executor an extra message is typically consumed by
+   another model round spent re-reading context instead of working — verify the
+   cost model of your own transport, then batch anyway.
 2. **If it cannot be checked, it is not done.** Name the check, not the
    intention. "Quality is high" is not a definition of done; a command that
    exits 0 is.
@@ -60,10 +61,12 @@ is not about politeness. The machine channel is a protocol.
    matters.** A capable executor plans better than your guess at its internals.
    Dictating steps is not "more precise"; it is a ceiling you install on your
    own result.
-4. **A typed refusal is a verdict, not an outage.** Refusals are deterministic
-   answers about *this* request. Read the reason; do not retry the same request
-   hopefully, and never retry an *unconfirmed* admission — it may already be
-   running.
+4. **A typed policy refusal is a verdict, not an outage.** It is a deterministic
+   answer about *this* request: read the reason and change the request rather
+   than resending it hopefully. Infrastructure failures and *unconfirmed*
+   admissions are a separate class with their own recovery path — and an
+   unconfirmed admission is never retried blind, because it may already be
+   running. See [`references/anti-patterns.md`](references/anti-patterns.md).
 5. **Steer before you cancel. Wrap up before you stop.** Corrections delivered
    mid-task are cheap; a cancel plus a fresh order throws away everything
    already paid for.
@@ -121,9 +124,9 @@ Negotiate the boundary once and keep it.
 | Delivery surface (chat, mail, PR) | owns | produces artifacts |
 | Decomposition of the work | may constrain | **owns** |
 | Execution, tools, environment | — | owns |
-| Verification and receipts | may re-check | **owns** (host-attested) |
-| The verdict on its own result | may accept/reject | **owns** as a claim |
-| The durable deliverable | routes it | **owns** |
+| Verification and receipts | may re-check independently | runs the checks; hosts the receipts |
+| Acceptance of the result | decides what to do with it | cannot overwrite the recorded acceptance; its own verdict is a claim |
+| The durable deliverable | routes it, holds a reference | holds custody while it exists |
 
 The last row matters: route the artifact, never re-type it. If you copy a result
 into your own store, you have created a second copy that will drift, and a future
@@ -166,10 +169,12 @@ running" as the expected answer, not a failure to report.
 |---|---|
 | [`references/agent-specificity.md`](references/agent-specificity.md) | You want the pairing map: what each side uniquely knows |
 | [`references/work-order.md`](references/work-order.md) | Writing an order of any size |
+| [`references/transport-adapter.md`](references/transport-adapter.md) | You are building or verifying the connection itself |
 | [`references/receipt-and-verification.md`](references/receipt-and-verification.md) | A result came back and you must judge it |
 | [`references/answer-contract.md`](references/answer-contract.md) | You are writing the return, or judging its quality |
 | [`references/conversation-discipline.md`](references/conversation-discipline.md) | Work is in flight; you want to check, correct or stop it |
 | [`references/anti-patterns.md`](references/anti-patterns.md) | Something feels inefficient and you want the name for it |
 | [`references/tone-and-persona.md`](references/tone-and-persona.md) | You are configuring how the agent writes to another agent |
+| [`references/communication-profile.md`](references/communication-profile.md) | You are configuring the pair: ten decisions to answer once |
 | [`references/why-this-shape.md`](references/why-this-shape.md) | You want the architectural reasons, not the rules |
 | [`examples/before-and-after.md`](examples/before-and-after.md) | You want to see the same request good and bad |
